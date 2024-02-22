@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RunTest {
-    //its RunTest origin
 
     @BeforeAll
     public static void before() {
@@ -56,4 +55,32 @@ public class RunTest {
         assertEquals(144.5, ClockAngleCalculator.calculateClockAngle(5, 1), "Угол в 5:01 должен быть 144.5 градусов");
     }
 
+    @Test
+    public void testCalculateClockAngleWithNegativeHour() {
+        assertThrows(IllegalArgumentException.class,
+                () -> ClockAngleCalculator.calculateClockAngle(-1, 30),
+                "Должно быть выброшено исключение для отрицательного значения часа");
+    }
+
+    @Test
+    public void testCalculateClockAngleWithHourGreaterThan12() {
+        assertThrows(IllegalArgumentException.class,
+                () -> ClockAngleCalculator.calculateClockAngle(13, 0),
+                "Должно быть выброшено исключение для часов больше 12");
+    }
+
+    @Test
+    public void testCalculateClockAngleWithNegativeMinute() {
+        assertThrows(IllegalArgumentException.class,
+                () -> ClockAngleCalculator.calculateClockAngle(10, -1),
+                "Должно быть выброшено исключение для отрицательного значения минут");
+    }
+
+    @Test
+    public void testCalculateClockAngleWithMinuteGreaterThan59() {
+        // test with error
+        assertThrows(IllegalArgumentException.class,
+                () -> ClockAngleCalculator.calculateClockAngle(11, 59),
+                "Должно быть выброшено исключение для минут больше 59");
+    }
 }
