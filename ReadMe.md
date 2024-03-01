@@ -1,11 +1,11 @@
 HM 3
-BrowseProjectsPage - страница проектов
-CreateNewTaskPage - модфльная форма создания задач
-DashboardPage - стартовая борда
-FilterPage - страница поиска(фильтра)
-HeaderMenuPage - меню в шапке
-IssuePage - страница задачи
-TestProjectPage - страница проекта Test
+BrowseProjectsPage - страница проектов  
+CreateNewTaskPage - модфльная форма создания задач  
+DashboardPage - стартовая борда  
+FilterPage - страница поиска(фильтра)  
+HeaderMenuPage - меню в шапке  
+IssuePage - страница задачи  
+TestProjectPage - страница проекта Test  
 
 Пейджи содаржат методы взаимодействия с элементами соответствующих страниц и селекторы.
 
