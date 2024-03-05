@@ -1,13 +1,12 @@
 package hw_3;
 
-import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import pages.*;
 
-import webhooks.WebHooks;
+import hooks.WebHooks;
 
 
 public class JiraTest extends WebHooks {
@@ -57,7 +56,6 @@ public class JiraTest extends WebHooks {
         jiraDashboardPage.signIn(username, password);
         openProjectIssueList();
         issueCounter = jiraTestProjectPage.getIssueCounter();
-        System.out.println("----Количество заявок на момент проверки: " + issueCounter);
         Assertions.assertNotNull(issueCounter);
     }
 
@@ -86,10 +84,6 @@ public class JiraTest extends WebHooks {
 
         openProjectIssueList();
         int afterIssueCounter = Integer.parseInt(jiraTestProjectPage.getIssueCounter());
-        System.out.println("----Счетчик запросов проекта:");
-        System.out.println("-------- на момент входа в проект: " + issueCounter);
-        System.out.println("-------- на момент создания баги " + issueKey + ": " + beforeIssueCounter);
-        System.out.println("-------- после создания создания баги: " + jiraTestProjectPage.getIssueCounter());
         Assertions.assertTrue(beforeIssueCounter < afterIssueCounter,
                 "Счетчик запросов " + beforeIssueCounter + " должен увеличиться");
 

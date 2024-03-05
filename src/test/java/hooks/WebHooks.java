@@ -1,4 +1,4 @@
-package webhooks;
+package hooks;
 
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,11 +27,6 @@ public class WebHooks {
         Configuration.browserCapabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
     }
 
-    @BeforeAll
-    public static void printStart() {
-        System.out.println("======Start tests======");
-    }
-
     @BeforeEach
     public void setup(TestInfo testInfo) {
         String browser = System.getProperty("browser", "chrome");
@@ -53,10 +48,5 @@ public class WebHooks {
     @AfterEach
     public void closeBrowser() {
         Selenide.closeWebDriver();
-    }
-
-    @AfterAll
-    public static void printEnd() {
-        System.out.println("======End tests======");
     }
 }
