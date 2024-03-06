@@ -13,7 +13,7 @@ public class TestProjectPage {
     private final SelenideElement searchProjectName = $x("//a[contains(text(),'Test')]");
     private final SelenideElement searchProjectIssueCounter = $x("//div[2]/div/div/div/div/span");
     private final SelenideElement testProjectIssues = $x(
-            "//*[@id=\"sidebar\"]/div/div[1]/nav/div/div/ul/li[5]/a/span[1]");
+            "//*[@id='sidebar']/div/div[1]/nav/div/div/ul/li[5]/a/span[1]");
 
     public Boolean isTestProjectPage() {
         return searchProjectName.shouldBe(Condition.visible).isDisplayed();
