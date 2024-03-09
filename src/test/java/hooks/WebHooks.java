@@ -4,11 +4,10 @@ import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll ;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.TestInfo;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+
+
 
 
 public class WebHooks {
@@ -17,6 +16,7 @@ public class WebHooks {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-fullscreen"); // macOS
         options.addArguments("--start-maximized"); // Windows
+        options.addArguments("--disable-notifications"); // Windows
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
     }
 
@@ -27,8 +27,9 @@ public class WebHooks {
         Configuration.browserCapabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
     }
 
-    @BeforeEach
-    public void setup(TestInfo testInfo) {
+
+    @Before
+    public void setup() {
         String browser = System.getProperty("browser", "chrome");
         Configuration.browser = browser;
         switch (browser) {
@@ -42,10 +43,9 @@ public class WebHooks {
         }
         Configuration.baseUrl = "https://edujira.ifellow.ru/";
         Selenide.open("/");
-        System.out.println("Тест: " + testInfo.getDisplayName());
     }
 
-    @AfterEach
+    @After
     public void closeBrowser() {
         Selenide.closeWebDriver();
     }

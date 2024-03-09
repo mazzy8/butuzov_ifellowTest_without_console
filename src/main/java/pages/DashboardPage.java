@@ -11,10 +11,12 @@ public class DashboardPage {
     private final SelenideElement passwordInput = $x("//input[@id='login-form-password']");
     private final SelenideElement loginButton = $x("//input[@id='login']");
 
-    public void signIn(String username, String password) {
+    public void inputLoginAndPassword(String username, String password) {
         loginInput.shouldBe(Condition.visible).setValue(username);
         passwordInput.shouldBe(Condition.visible).setValue(password);
-        loginButton.shouldBe(Condition.visible).click();
     }
 
+    public void clickLoginButton() {
+        loginButton.shouldBe(Condition.visible).click();
+    }
 }

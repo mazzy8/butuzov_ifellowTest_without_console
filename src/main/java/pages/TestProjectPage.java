@@ -10,13 +10,13 @@ public class TestProjectPage {
     private final FilterPage jiraFilterPage = new FilterPage();
     private final CreateNewTaskPage jiraNewTaskPage = new CreateNewTaskPage();
 
-    private final SelenideElement searchProjectName = $x("//a[contains(text(),'Test')]");
+    private final SelenideElement searchProjectName = $x("//*[@id='sidebar']/div/div[1]/div/div/div[2]/h1/div/div/a");
     private final SelenideElement searchProjectIssueCounter = $x("//div[2]/div/div/div/div/span");
     private final SelenideElement testProjectIssues = $x(
             "//*[@id='sidebar']/div/div[1]/nav/div/div/ul/li[5]/a/span[1]");
 
-    public Boolean isTestProjectPage() {
-        return searchProjectName.shouldBe(Condition.visible).isDisplayed();
+    public String getProjectName() {
+        return searchProjectName.shouldBe(Condition.visible).getAttribute("Title");
     }
 
     public String getIssueCounter() {

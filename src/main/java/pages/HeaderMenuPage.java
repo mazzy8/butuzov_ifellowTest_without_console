@@ -8,13 +8,13 @@ import static com.codeborne.selenide.Selenide.$x;
 public class HeaderMenuPage {
     private final SelenideElement searchInput = $x("//input[@id='quickSearchInput']");
     private final SelenideElement newTaskButton = $x("//*[@id='create_link']");
-    private final SelenideElement userAvatar= $x("//a[@id='header-details-user-fullname']/span/span/img");
     private final SelenideElement projectsButton = $x("//a[contains(text(),'Проекты')]");
     private final SelenideElement projectMenu = $x("//a[contains(text(),'Просмотр всех проектов')]");
     private final SelenideElement messageFromPopUp= $x("//*[@id='aui-flag-container']/div/div");
+    private final SelenideElement userName= $x("//a[contains(@title,'Пользовательский')]");
 
-    public Boolean isUserSignedIn() {
-        return userAvatar.shouldBe(Condition.visible).isDisplayed();
+    public String getUserName() {
+        return userName.shouldBe(Condition.visible).getAttribute("data-username");
     }
 
     public void runSearch(String searchValue) {
