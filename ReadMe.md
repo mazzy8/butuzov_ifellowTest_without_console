@@ -7,8 +7,9 @@ Pages:
 - FilterPage - страница поиска(фильтра)  
 - HeaderMenuPage - меню в шапке  
 - IssuePage - страница задачи  
-- TestProjectPage - страница проекта Test 
-Steps:
+- TestProjectPage - страница проекта Test   
+
+Steps:  
 - Authorization - тест авторизации
 - CheckIssue - проверка параметров задачи `<IssueName>`
 - GoToProject - переход к проекту `<projectName>`
