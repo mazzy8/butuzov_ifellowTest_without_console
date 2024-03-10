@@ -7,9 +7,6 @@ import com.codeborne.selenide.Selenide;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
-
-
-
 public class WebHooks {
 
     public static void setupChrome() {
@@ -26,7 +23,6 @@ public class WebHooks {
         options.addArguments("--start-fullscreen");
         Configuration.browserCapabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
     }
-
 
     @Before
     public void setup() {

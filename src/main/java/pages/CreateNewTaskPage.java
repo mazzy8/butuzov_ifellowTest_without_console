@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.switchTo;
@@ -13,11 +14,11 @@ public class CreateNewTaskPage {
     private final SelenideElement taskText = $x("//*[@id='tinymce']");
     private final SelenideElement createTaskButton = $x("//*[@id='create-issue-submit']");
 
-    public String createNewTask(String[] newIssueParams) {
-        taskType.shouldBe(Condition.visible).setValue(newIssueParams[0]);
-        taskSummary.shouldBe(Condition.visible).setValue(newIssueParams[1]);
+    public String createNewTaskFromMap(Map<String, String> newIssueParams) {
+        taskType.shouldBe(Condition.visible).setValue(newIssueParams.get("type"));
+        taskSummary.shouldBe(Condition.visible).setValue(newIssueParams.get("summary"));
         switchTo().frame("mce_7_ifr");
-        taskText.shouldBe(Condition.visible).setValue(newIssueParams[2]);
+        taskText.shouldBe(Condition.visible).setValue(newIssueParams.get("description"));
         switchTo().defaultContent();
         createTaskButton.shouldBe(Condition.visible).click();
         String popUpText = jiraHeaderMenuPage.getTextFromPopUp();

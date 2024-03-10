@@ -1,5 +1,6 @@
 package pages;
 
+import java.util.Map;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
@@ -19,10 +20,10 @@ public class TestProjectPage {
         return searchProjectName.shouldBe(Condition.visible).getAttribute("Title");
     }
 
-    public String getIssueCounter() {
+    public Integer getIssueCounter() {
         String issueCounter = searchProjectIssueCounter.shouldBe(Condition.visible).text();
         String[] parts = issueCounter.split(" ");
-        return parts[parts.length - 1];
+        return  Integer.parseInt(parts[parts.length - 1]);
     }
 
     public void goToIssue(String issueName, String issueType) {
@@ -35,8 +36,8 @@ public class TestProjectPage {
         testProjectIssues.shouldBe(Condition.visible).click();
     }
 
-    public String createNewIssue(String[] newIssueParams) {
+    public String createNewIssueFromMap(Map<String, String> newIssueParams) {
         jiraHeaderMenuPage.runNewTask();
-        return jiraNewTaskPage.createNewTask(newIssueParams);
+        return jiraNewTaskPage.createNewTaskFromMap(newIssueParams);
     }
 }
