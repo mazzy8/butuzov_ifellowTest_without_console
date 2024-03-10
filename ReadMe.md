@@ -1,13 +1,16 @@
-HM 3
-BrowseProjectsPage - страница проектов  
-CreateNewTaskPage - модфльная форма создания задач  
-DashboardPage - стартовая борда  
-FilterPage - страница поиска(фильтра)  
-HeaderMenuPage - меню в шапке  
-IssuePage - страница задачи  
-TestProjectPage - страница проекта Test  
+Home Work 4   
 
-Пейджи содаржат методы взаимодействия с элементами соответствующих страниц и селекторы.
-
-// в доработке
-mvn test -Dselenide.browser=chrome or mvn test -Dselenide.browser=firefox
+Pages:  
+- BrowseProjectsPage - страница проектов  
+- CreateNewTaskPage - модфльная форма создания задач  
+- DashboardPage - стартовая борда  
+- FilterPage - страница поиска(фильтра)  
+- HeaderMenuPage - меню в шапке  
+- IssuePage - страница задачи  
+- TestProjectPage - страница проекта Test 
+Steps:
+- Authorization - тест авторизации
+- CheckIssue - проверка параметров задачи `<IssueName>`
+- GoToProject - переход к проекту `<projectName>`
+- NewIssue - создание задачи и смена ее статусов
+- PreconditionAuthorization - прекондишн авторизации для NewIssue, GoToProject и CheckIssue.
