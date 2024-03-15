@@ -1,16 +1,17 @@
 package tests;
 
 import hooks.WebHooks;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import org.json.JSONObject;
+import  org.junit.jupiter.api.Test;
+import steps.*;
 
-import org.junit.runner.RunWith;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "classpath:features",
-        glue = {"classpath:steps", "classpath:hooks"},
-        plugin = {"pretty", "html:target/cucumber"}
-)
+
 public class TestClass extends WebHooks {
+    //go
 }
+
+// JSONobject body = new JSONObject(new String(files.readAllBytes(Paths.get("src/test/resources/json/paren.json"))))
