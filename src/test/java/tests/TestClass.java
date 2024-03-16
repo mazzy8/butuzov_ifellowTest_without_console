@@ -1,17 +1,15 @@
 package tests;
 
-import hooks.Hooks;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import api.*;
-
 import org.json.JSONObject;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import api.*;
+import hooks.Hooks;
+import utils.JsonFileReader;
+import java.io.IOException;
 
 
 public class TestClass extends Hooks {
@@ -43,11 +41,14 @@ public class TestClass extends Hooks {
     @Test
     public void reqResTest() throws IOException {
         try {
-            JSONObject body = new JSONObject(new String(Files.readAllBytes(Paths.get("src/test/resources/json/reqres.json"))));
+            JSONObject body = JsonFileReader.readJsonFromFile("src/test/resources/json/reqres.json");
             body.put("name", "Tomato");
             body.put("job", "Eat maket");
 
-            Response response = reqResApi.postApi("https://reqres.in/", "/api/users", body.toString(), 201);
+            Response response = reqResApi.postApi("https://reqres.in/",
+                    "/api/users",
+                    body.toString(),
+                    201);
             Assertions.assertEquals("Tomato", response.body().path("name"), "Имя должно совпадать");
             Assertions.assertEquals("Eat maket", response.body().path("job"),
                     "Место работы должно совпадать");
