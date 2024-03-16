@@ -42,13 +42,17 @@ public class TestClass extends Hooks {
 
     @Test
     public void reqResTest() throws IOException {
-        JSONObject body = new JSONObject(new String(Files.readAllBytes(Paths.get("src/test/resources/json/reqres.json"))));
-        body.put("name", "Tomato");
-        body.put("job", "Eat maket");
+        try {
+            JSONObject body = new JSONObject(new String(Files.readAllBytes(Paths.get("src/test/resources/json/reqres.json"))));
+            body.put("name", "Tomato");
+            body.put("job", "Eat maket");
 
-        Response response = reqResApi.postApi("https://reqres.in/", "/api/users", body.toString(), 201);
-        Assertions.assertEquals("Tomato", response.body().path("name"), "Имя должно совпадать");
-        Assertions.assertEquals("Eat maket", response.body().path("job"),
-                "Место работы должно совпадать");
+            Response response = reqResApi.postApi("https://reqres.in/", "/api/users", body.toString(), 201);
+            Assertions.assertEquals("Tomato", response.body().path("name"), "Имя должно совпадать");
+            Assertions.assertEquals("Eat maket", response.body().path("job"),
+                    "Место работы должно совпадать");
+        } catch (IOException e) {
+            Assertions.fail("Ошибка при чтении файла");
+        }
     }
 }
