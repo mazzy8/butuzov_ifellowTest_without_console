@@ -4,11 +4,10 @@ import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.TestInfo;
+import utils.ConfigProvider;
 
 
 public class WebHooks {
@@ -40,9 +39,8 @@ public class WebHooks {
                 setupChrome();
                 break;
         }
-        Configuration.baseUrl = "https://edujira.ifellow.ru/";
+        Configuration.baseUrl = ConfigProvider.JIRAURL;
         Selenide.open("/");
-        System.out.println("Тест: " + testInfo.getDisplayName());
     }
 
     @AfterEach

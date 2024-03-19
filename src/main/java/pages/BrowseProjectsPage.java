@@ -3,12 +3,9 @@ package pages;
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Selenide.$x;
 
-
 public class BrowseProjectsPage {
-
     private final SelenideElement testProjectLink = $x("//a[contains(text(),'Test')]");
     private final SelenideElement otherProjectLink = $x("//a[contains(text(),'otherProject')]");
 
@@ -24,5 +21,4 @@ public class BrowseProjectsPage {
         }
         testProjectLink.shouldBe(Condition.visible).click();
     }
-
 }

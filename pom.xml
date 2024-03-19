@@ -34,7 +34,7 @@
         <allure.version>2.24.0</allure.version>
         <allure-maven.version>2.24.0</allure-maven.version>
         <json.version>20210307</json.version>
-
+        <config.version>1.4.2</config.version>
         <parallelCount>1</parallelCount>
     </properties>
 
@@ -128,6 +128,13 @@
             <version>${junit.jupiter.version}</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.typesafe/config -->
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>${config.version}</version>1.4.2
+        </dependency>
+
     </dependencies>
 
     <build>

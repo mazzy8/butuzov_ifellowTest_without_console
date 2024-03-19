@@ -2,7 +2,6 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Selenide.$x;
 
 public class TestProjectPage {
@@ -19,10 +18,10 @@ public class TestProjectPage {
         return searchProjectName.shouldBe(Condition.visible).isDisplayed();
     }
 
-    public String getIssueCounter() {
+    public Integer getIssueCounter() {
         String issueCounter = searchProjectIssueCounter.shouldBe(Condition.visible).text();
         String[] parts = issueCounter.split(" ");
-        return parts[parts.length - 1];
+        return Integer.parseInt(parts[parts.length - 1]);
     }
 
     public void goToIssue(String issueName, String issueType) {

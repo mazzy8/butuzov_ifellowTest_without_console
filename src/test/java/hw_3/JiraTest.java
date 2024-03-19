@@ -3,16 +3,14 @@ package hw_3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-
 import pages.*;
-
 import hooks.WebHooks;
-
+import utils.ConfigProvider;
+import java.util.List;
 
 public class JiraTest extends WebHooks {
-    public static String issueCounter = "Не проверялось";
+    public static Integer issueCounter;
     public static String issueKey;
-
 
     private final DashboardPage jiraDashboardPage = new DashboardPage();
     private final BrowseProjectsPage jiraBrowseProjectsPage = new BrowseProjectsPage();
@@ -20,32 +18,26 @@ public class JiraTest extends WebHooks {
     private final IssuePage jiraIssuePage = new IssuePage();
     private final HeaderMenuPage jiraHeaderMenuPage = new HeaderMenuPage();
 
-    private final String username = "AT4";
-    private final String password = "Qwerty123";
-    private final String issueNameForSearch = "TestSelenium";
-    private final String issueStatus = "СДЕЛАТЬ";
-    private final String issueFixVersions = "Version 2.0";
-    private final String[] newIssueParams = {"Ошибка", "CreateNewBugAT4", "BigBigBigBuuuuuuuuuug!!!!!"};
-    private final String[] issueTypes = {"СДЕЛАТЬ", "В РАБОТЕ", "РЕШЕННЫЕ", "ПЕРЕОТКРЫТ", "ГОТОВО"};
-
-
+    private void authorization() {
+        jiraDashboardPage.signIn(ConfigProvider.LOGIN, ConfigProvider.PASSWORD);
+    }
     private void openProjectIssueList() {
         jiraHeaderMenuPage.goToAllProjects();
-        jiraBrowseProjectsPage.goToProject("Test");
+        jiraBrowseProjectsPage.goToProject(ConfigProvider.PROJECTNAME);
         jiraTestProjectPage.goToProjectIssueList();
     }
 
     @Test
     @DisplayName("Авторизация")
     public void checkSignIn() {
-        jiraDashboardPage.signIn(username, password);
+        authorization();
         Assertions.assertTrue(jiraHeaderMenuPage.isUserSignedIn());
     }
 
     @Test
     @DisplayName("Переход в проект Test")
     public void checkGoToTestProject() {
-        jiraDashboardPage.signIn(username, password);
+        authorization();
         openProjectIssueList();
         Assertions.assertTrue(jiraTestProjectPage.isTestProjectPage());
     }
@@ -53,7 +45,7 @@ public class JiraTest extends WebHooks {
     @Test
     @DisplayName("Задачи на странице проекта Test")
     public void checkTestProjectIssues() {
-        jiraDashboardPage.signIn(username, password);
+        authorization();
         openProjectIssueList();
         issueCounter = jiraTestProjectPage.getIssueCounter();
         Assertions.assertNotNull(issueCounter);
@@ -62,37 +54,37 @@ public class JiraTest extends WebHooks {
     @Test
     @DisplayName("Проверка параметров задачи TestSelenium")
     public void checkTestSeleniumTask() {
-        jiraDashboardPage.signIn(username, password);
+        authorization();
         openProjectIssueList();
-        jiraTestProjectPage.goToIssue(issueNameForSearch, "Task");
-        Assertions.assertEquals(issueNameForSearch, jiraIssuePage.getIssueSummary(),
-                "Саммери должно быть " + issueNameForSearch);
-        Assertions.assertEquals(issueStatus, jiraIssuePage.getIssueStatusValue(),
-                "Статус должен быть " + issueStatus);
-        Assertions.assertEquals(issueFixVersions, jiraIssuePage.getIssueFixVersions(),
-                "Версия должна быть " + issueFixVersions);
+        jiraTestProjectPage.goToIssue(ConfigProvider.ISSUENAME, ConfigProvider.ISSUETYPE);
+        Assertions.assertEquals(ConfigProvider.ISSUENAME, jiraIssuePage.getIssueSummary(),
+                "Саммери должно быть " + ConfigProvider.ISSUENAME);
+        Assertions.assertEquals(ConfigProvider.ISSUESTATUS, jiraIssuePage.getIssueStatusValue(),
+                "Статус должен быть " + ConfigProvider.ISSUESTATUS);
+        Assertions.assertEquals(ConfigProvider.ISSUEFIXVERSION, jiraIssuePage.getIssueFixVersions(),
+                "Версия должна быть " + ConfigProvider.ISSUEFIXVERSION);
     }
 
     @Test
     @DisplayName("Заводим багу")
     public void checkNewBugCreate() {
-        jiraDashboardPage.signIn(username, password);
+        authorization();
         openProjectIssueList();
-        int beforeIssueCounter = Integer.parseInt(jiraTestProjectPage.getIssueCounter());
-        issueKey = jiraTestProjectPage.createNewIssue(newIssueParams);
+        int beforeIssueCounter = jiraTestProjectPage.getIssueCounter();
+        issueKey = jiraTestProjectPage.createNewIssue(ConfigProvider.NEWISSUEPARAMS);
         Assertions.assertNotNull(issueKey,"Должен вернуть номер новой задачи" + issueKey);
 
         openProjectIssueList();
-        int afterIssueCounter = Integer.parseInt(jiraTestProjectPage.getIssueCounter());
+        int afterIssueCounter = jiraTestProjectPage.getIssueCounter();
         Assertions.assertTrue(beforeIssueCounter < afterIssueCounter,
                 "Счетчик запросов " + beforeIssueCounter + " должен увеличиться");
 
         jiraHeaderMenuPage.runSearch(issueKey);
-        for (int i = 0; i < issueTypes.length; i++) {
-            jiraIssuePage.changeIssueStatus(issueTypes[i]);
-            Assertions.assertEquals(issueTypes[i], jiraIssuePage.getIssueStatusValue(),
-                    "Тип баги должен быть " + issueTypes[i]);
+        List<String> issueTypes = ConfigProvider.ISSUETYPES;
+        for (String issueType : issueTypes) {
+            jiraIssuePage.changeIssueStatus(issueType);
+            Assertions.assertEquals(issueType, jiraIssuePage.getIssueStatusValue(),
+                    "Тип баги должен быть " + issueType);
         }
-
     }
 }
