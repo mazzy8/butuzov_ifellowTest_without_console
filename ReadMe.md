@@ -1,13 +1,21 @@
-HM 3
+### HomeWork6  
+
+**Структура проекта**  
+`scr/main/java/`  
+_pages:_  
 BrowseProjectsPage - страница проектов  
-CreateNewTaskPage - модфльная форма создания задач  
+CreateNewTaskPage - модальная форма создания задач  
 DashboardPage - стартовая борда  
 FilterPage - страница поиска(фильтра)  
 HeaderMenuPage - меню в шапке  
 IssuePage - страница задачи  
-TestProjectPage - страница проекта Test  
+TestProjectPage - страница проекта Test
+  
+_utils:_  
+ConfigProvider - интерфейс для переменных в jira.conf
 
-Пейджи содаржат методы взаимодействия с элементами соответствующих страниц и селекторы.
-
-// в доработке
-mvn test -Dselenide.browser=chrome or mvn test -Dselenide.browser=firefox
+`scr/test/java/`  
+_hooks_  
+WebHooks - параметризация  
+_tests_  
+JiraTest - тесты  

@@ -1,4 +1,4 @@
-package hw_3;
+package tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
