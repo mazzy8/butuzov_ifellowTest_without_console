@@ -1,14 +1,15 @@
 package hooks;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.TestInfo;
 import utils.ConfigProvider;
-
+import helpers.AllureEnvironmentWriter;
 
 public class WebHooks {
 
@@ -27,7 +28,7 @@ public class WebHooks {
     }
 
     @BeforeEach
-    public void setup(TestInfo testInfo) {
+    public void setup() {
         String browser = System.getProperty("browser", "chrome");
         Configuration.browser = browser;
         switch (browser) {
@@ -41,10 +42,16 @@ public class WebHooks {
         }
         Configuration.baseUrl = ConfigProvider.JIRAURL;
         Selenide.open("/");
+        AllureEnvironmentWriter.writeEnvironmentProperties();
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+        );
     }
 
     @AfterEach
     public void closeBrowser() {
         Selenide.closeWebDriver();
     }
+
 }

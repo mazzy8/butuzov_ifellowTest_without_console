@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Flaky;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +9,7 @@ import hooks.WebHooks;
 import utils.ConfigProvider;
 import java.util.List;
 
+@DisplayName("JiraTestCase")
 public class JiraTest extends WebHooks {
     public static Integer issueCounter;
     public static String issueKey;
@@ -52,6 +54,7 @@ public class JiraTest extends WebHooks {
     }
 
     @Test
+    @Flaky
     @DisplayName("Проверка параметров задачи TestSelenium")
     public void checkTestSeleniumTask() {
         authorization();
