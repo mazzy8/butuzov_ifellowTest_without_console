@@ -2,7 +2,8 @@ package hooks;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
+import helpers.CustomAllureSelenide;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import com.codeborne.selenide.Selenide;
@@ -43,10 +44,7 @@ public class WebHooks {
         Configuration.baseUrl = ConfigProvider.JIRAURL;
         Selenide.open("/");
         AllureEnvironmentWriter.writeEnvironmentProperties();
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(false)
-        );
+        SelenideLogger.addListener("AllureSelenide", new CustomAllureSelenide(Allure.getLifecycle()));
     }
 
     @AfterEach

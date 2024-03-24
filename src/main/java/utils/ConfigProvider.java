@@ -13,14 +13,14 @@ public interface ConfigProvider {
                 : ConfigFactory.load("jira.conf");
     }
 
-    String JIRAURL = readConfig().getString("jiraUrl");
-    String LOGIN = readConfig().getString("userParams.user.login");
-    String PASSWORD = readConfig().getString("userParams.user.password");
-    String PROJECTNAME = readConfig().getString("jiraProjectName");
-    String ISSUETYPE = readConfig().getString("checkIssueParams.issueType");
-    String ISSUENAME = readConfig().getString("checkIssueParams.issueName");
-    String ISSUESTATUS = readConfig().getString("checkIssueParams.issueStatus");
-    String ISSUEFIXVERSION = readConfig().getString("checkIssueParams.issueFixVersions");
-    String[] NEWISSUEPARAMS = readConfig().getStringList("newIssueParams").toArray(new String[0]);
-    List<String> ISSUETYPES = config.getStringList("issueTypes");
+    String JIRAURL = config.getString("jira.url");
+    String LOGIN = config.getString("login");
+    String PASSWORD = config.getString("password");
+    String PROJECTNAME = config.getString("jira.project.name");
+    String ISSUETYPE = config.getString("issue.type");
+    String ISSUENAME = config.getString("issue.name");
+    String ISSUESTATUS = config.getString("issue.status");
+    String ISSUEFIXVERSION = config.getString("issue.fix.versions");
+    String[] NEWISSUEPARAMS = config.getStringList("new.issue.params").toArray(new String[0]);
+    List<String> ISSUETYPES = config.getStringList("issue.types");
 }
