@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
 import java.util.Optional;
 
+
 public class CustomAllureSelenide extends AllureSelenide {
 
     private final AllureLifecycle lifecycle;
@@ -22,7 +23,8 @@ public class CustomAllureSelenide extends AllureSelenide {
     @Override
     public void afterEvent(final LogEvent event) {
         if (event.getStatus().equals(LogEvent.EventStatus.FAIL)) {
-            screenshot.ifPresent(bytes -> lifecycle.addAttachment("Перед ошибкой", "image/png", "png", bytes));
+            screenshot.ifPresent(bytes ->
+                    lifecycle.addAttachment("Before FAIL", "image/png", "png", bytes));
         } else {
             screenshot = getScreenshotBytes();
         }
