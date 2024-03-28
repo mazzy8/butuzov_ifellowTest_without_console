@@ -21,8 +21,6 @@ public class ReqResApi {
     }
 
     public Response getUserDataResponse(JSONObject body) {
-        System.out.println(body);
-        System.out.println(ConfigProvider.REQRESEDPOINTUSERS);
         return APIMethods.postApi(baseUrl, ConfigProvider.REQRESEDPOINTUSERS, body.toString());
     }
 }
