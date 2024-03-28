@@ -2,34 +2,24 @@ package tests;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.json.JSONObject;
-import java.util.List;
-import java.util.Map;
 import api.*;
 import hooks.Hooks;
-import utils.JsonFileReader;
+import utils.ConfigProvider;
 import java.io.IOException;
 
-
+@DisplayName("APITests")
 public class TestClass extends Hooks {
     private final RickAndMortyApi rickAndMortyApi = new RickAndMortyApi();
     private final ReqResApi reqResApi = new ReqResApi();
 
     @Test
+    @DisplayName("Rick and Morty")
     public void rickAndMortyTest() {
-
-        Map<String, String> queryParams = Map.of("name", "Morty Smith");
-        Response findMortyResponse = rickAndMortyApi.getApi(
-                "https://rickandmortyapi.com/api/character", queryParams,200);
-        List<String> allEpisodes = findMortyResponse.jsonPath().get("results[0].episode");
-        String lastEpisodeUrl = allEpisodes.get(allEpisodes.size() - 1);
-
-        Response getEpisodeResponse = rickAndMortyApi.getApi(lastEpisodeUrl,null,200);
-        List<String> allCharacters = getEpisodeResponse.jsonPath().get("characters");
-        String lastCharacterUrl = allCharacters.get(allCharacters.size() - 1);
-
-        Response lastCharacterResponse = rickAndMortyApi.getApi(lastCharacterUrl,null,200);
+        Response findMortyResponse = rickAndMortyApi.findUser(rickAndMortyApi.createParamsMap());
+        Response lastCharacterResponse = rickAndMortyApi.getUserDataResponse();
 
         Assertions.assertEquals(findMortyResponse.jsonPath().getString("results[0].species"),
                 lastCharacterResponse.jsonPath().getString("species"), "Расса должна совпадать");
@@ -39,21 +29,13 @@ public class TestClass extends Hooks {
     }
 
     @Test
+    @DisplayName("ReqRes")
     public void reqResTest() throws IOException {
-        try {
-            JSONObject body = JsonFileReader.readJsonFromFile("src/test/resources/json/reqres.json");
-            body.put("name", "Tomato");
-            body.put("job", "Eat maket");
+        JSONObject body = reqResApi.getAndUpdateJsonBody();
+        Response response = reqResApi.getUserDataResponse(body);
 
-            Response response = reqResApi.postApi("https://reqres.in/",
-                    "/api/users",
-                    body.toString(),
-                    201);
-            Assertions.assertEquals("Tomato", response.body().path("name"), "Имя должно совпадать");
-            Assertions.assertEquals("Eat maket", response.body().path("job"),
-                    "Место работы должно совпадать");
-        } catch (IOException e) {
-            Assertions.fail("Ошибка при чтении файла");
-        }
+        Assertions.assertEquals(ConfigProvider.REQRESEXPECTEDSTATUS, response.getStatusCode());
+        Assertions.assertEquals(ConfigProvider.REQRESUSERNAME, response.getBody().path("name"));
+        Assertions.assertEquals(ConfigProvider.REQRESUSERJOB, response.getBody().path("job"));
     }
 }

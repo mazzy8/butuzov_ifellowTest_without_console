@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.iFellow</groupId>
-    <artifactId>ifellowTest_without_console</artifactId>
+    <artifactId>ifellowTest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <!-- Java 8 -->
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <compiler.target.version>${java.version}</compiler.target.version>
         <compiler.source.version>${java.version}</compiler.source.version>
 
@@ -34,30 +34,12 @@
         <allure.version>2.24.0</allure.version>
         <allure-maven.version>2.24.0</allure-maven.version>
         <json.version>20210307</json.version>
-
+        <config.version>1.4.2</config.version>
         <parallelCount>1</parallelCount>
     </properties>
 
 
     <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>3.0.8</version>
-            <type>pom</type>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <version>3.0.8</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-json -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-json</artifactId>
-            <version>3.0.8</version>
-        </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -146,6 +128,11 @@
             <version>${junit.jupiter.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>${config.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -157,8 +144,8 @@
                 <version>3.8.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
