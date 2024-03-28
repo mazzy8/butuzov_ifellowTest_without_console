@@ -24,7 +24,7 @@ public class CustomAllureSelenide extends AllureSelenide {
         if (event.getStatus().equals(LogEvent.EventStatus.FAIL) ||
                 event.getStatus().equals(LogEvent.EventStatus.PASS)) {
             screenshot.ifPresent(bytes -> lifecycle.addAttachment(
-                    "Fail", "image/png","png", bytes));
+                    "Screenshot", "image/png","png", bytes));
         } else {
             screenshot = getScreenshotBytes();
         }

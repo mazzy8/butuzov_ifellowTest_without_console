@@ -17,6 +17,7 @@ ConfigProvider - интерфейс для переменных в jira.conf
 _helpers:_  
 AllureEnvironmentWriter - запись данных тестового окружения в файл
 BrowserInfo - получение данных по браузеру
+CustomAllureSelenide - настройка скриншотов тестов
 
 `scr/test/java/`  
 _hooks_  
