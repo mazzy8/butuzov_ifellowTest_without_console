@@ -15,13 +15,15 @@ public class LocationValueModificationFilter implements Filter {
                            FilterContext ctx) {
 
         Response response = ctx.next(requestSpec, responseSpec);
-        String responseBody = response.getBody().asString();
-        JSONObject jsonResponse = new JSONObject(responseBody);
+        if (response.statusCode() == 200) {
+            String responseBody = response.getBody().asString();
+            JSONObject jsonResponse = new JSONObject(responseBody);
 
-        if (jsonResponse.has("id") && jsonResponse.getInt("id") == 825) {
-            jsonResponse.getJSONObject("location").put("name", "Citadel of Ricks");
+            if (jsonResponse.has("id") && jsonResponse.getInt("id") == 825) {
+                jsonResponse.getJSONObject("location").put("name", "Citadel of Ricks");
 
-            return new ResponseBuilder().clone(response).setBody(jsonResponse.toString()).build();
+                return new ResponseBuilder().clone(response).setBody(jsonResponse.toString()).build();
+            }
         }
         return response;
     }

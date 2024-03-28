@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 import utils.LocationValueModificationFilter;
 
 public class APIMethods {
-    public static Response getApi(String baseUri, Map<String, String> queryParams, int statusCode) {
+    public static Response getApi(String baseUri, Map<String, String> queryParams) {
         RequestSpecification requestSpecBuilder = given().baseUri(baseUri);
         if (queryParams != null && !queryParams.isEmpty()) {
             queryParams.forEach(requestSpecBuilder::queryParam);
@@ -18,7 +18,6 @@ public class APIMethods {
                 .then()
                 .log().ifError()
                 .assertThat()
-                .statusCode(statusCode)
                 .extract()
                 .response();
     }

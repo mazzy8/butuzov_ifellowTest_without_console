@@ -1,9 +1,9 @@
 package hooks;
 
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeEach;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
+import org.junit.jupiter.api.BeforeEach;
 
 public class Hooks {
     @BeforeEach
