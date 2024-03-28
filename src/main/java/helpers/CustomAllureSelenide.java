@@ -21,17 +21,15 @@ public class CustomAllureSelenide extends AllureSelenide {
 
     @Override
     public void afterEvent(final LogEvent event) {
-        if (event.getStatus().equals(LogEvent.EventStatus.FAIL) ||
-                event.getStatus().equals(LogEvent.EventStatus.PASS)) {
-            screenshot.ifPresent(bytes -> lifecycle.addAttachment(
-                    "Screenshot", "image/png","png", bytes));
+        if (event.getStatus().equals(LogEvent.EventStatus.FAIL)) {
+            screenshot.ifPresent(bytes -> lifecycle.addAttachment("Перед ошибкой", "image/png", "png", bytes));
         } else {
             screenshot = getScreenshotBytes();
         }
         super.afterEvent(event);
     }
 
-    public static Optional<byte[]> getScreenshotBytes() {
+    private static Optional<byte[]> getScreenshotBytes() {
         try {
             return WebDriverRunner.hasWebDriverStarted()
                     ? Optional.of(((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES))
