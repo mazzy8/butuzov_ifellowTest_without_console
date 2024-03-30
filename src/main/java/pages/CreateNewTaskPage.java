@@ -29,5 +29,4 @@ public class CreateNewTaskPage {
         String popUpText = jiraHeaderMenuPage.getTextFromPopUp();
         return popUpText.split(" ")[1];
     }
-
 }

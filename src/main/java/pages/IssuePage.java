@@ -45,11 +45,6 @@ public class IssuePage {
         return issueFixVersions.shouldBe(Condition.visible).text();
     }
 
-    @Step("Получение номера задачи")
-    public String getIssueKey() {
-        return issueKey.shouldBe(Condition.visible).text();
-    }
-
     @Step("Смена статуса задачи на \"{statusName}\"")
     public void changeIssueStatus(String statusName) {
         switch (statusName) {

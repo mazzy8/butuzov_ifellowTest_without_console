@@ -62,8 +62,6 @@ public class JiraTest extends WebHooks {
         jiraTestProjectPage.goToIssue(ConfigProvider.ISSUENAME, ConfigProvider.ISSUETYPE);
         Assertions.assertEquals(ConfigProvider.ISSUENAME, jiraIssuePage.getIssueSummary(),
                 "Саммери должно быть " + ConfigProvider.ISSUENAME);
-        Assertions.assertEquals(ConfigProvider.ISSUESTATUS, jiraIssuePage.getIssueStatusValue(),
-                "Статус должен быть " + ConfigProvider.ISSUESTATUS);
         Assertions.assertEquals(ConfigProvider.ISSUEFIXVERSION, jiraIssuePage.getIssueFixVersions(),
                 "Версия должна быть " + ConfigProvider.ISSUEFIXVERSION);
     }

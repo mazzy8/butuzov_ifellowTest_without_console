@@ -8,8 +8,10 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class BrowseProjectsPage {
-    private final SelenideElement testProjectLink = $x("//a[contains(text(),'Test')]");
-    private final SelenideElement otherProjectLink = $x("//a[contains(text(),'otherProject')]");
+    private final SelenideElement testProjectLink = $x("//a[contains(text(),'Test')]")
+            .as("Cсылка на проект Тест");
+    private final SelenideElement otherProjectLink = $x("//a[contains(text(),'otherProject')]")
+            .as("Cсылка на другой проект");
 
     @Step("Переход в проект \"{projectName}\"")
     public void goToProject(String projectName) {
