@@ -13,9 +13,9 @@ Run report
 mvn allure:serve
 ```
 
-Структура проекта
-scr/main/java/
-steps:
+Структура проекта  
+scr/main/java/  
+steps:  
 ReqResApi - методы взаимодействия с апи и обработки информации  
 RickAndMortiApi - методы взаимодействия с апи и обработки информации  
 
