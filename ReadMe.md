@@ -8,11 +8,11 @@
 
 >Run tests
 >```Bash
->mvn clean test #bash
+>mvn clean test
 >```
 >Run report
 >```Bash
->mvn allure:serve #bash
+>mvn allure:serve
 >```
 
 **Структура проекта**  
