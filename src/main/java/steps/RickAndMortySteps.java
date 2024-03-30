@@ -20,7 +20,7 @@ public class RickAndMortySteps {
         this.characterName = characterName;
     }
 
-    @Когда("^отправляем запрос на поиск пользователя и ожидаем статус: (.+)$")
+    @Когда("^отправляем запрос на поиск пользователя и ожидаем статус: (\\d{3})$")
     public void getUserData(String statusCode) {
         Response findUserResponse = rickAndMortyApi.findUser(rickAndMortyApi.createParamsMap(this.characterName));
         Assertions.assertEquals(Integer.parseInt(statusCode), findUserResponse.statusCode());
@@ -34,7 +34,7 @@ public class RickAndMortySteps {
         this.lastEpisodeUrl = lastEpisodeUrl;
     }
 
-    @Когда("^отправляем запрос на получение списка персонажей из последней серии и ожидаем статус: (.+)$")
+    @Когда("^отправляем запрос на получение списка персонажей из последней серии и ожидаем статус: (\\d{3})$")
     public void getCharacterList(String statusCode) {
         Response getCharacterList = rickAndMortyApi.executeGetRequest(this.lastEpisodeUrl);
         Assertions.assertEquals(Integer.parseInt(statusCode), getCharacterList.statusCode());
@@ -48,7 +48,7 @@ public class RickAndMortySteps {
         this.lastCharacterUrl = lastCharacterUrl;
     }
 
-    @Когда("^оправляем запрос на получение данных персонажа и ожидаем статус: (.+)$")
+    @Когда("^оправляем запрос на получение данных персонажа и ожидаем статус: (\\d{3})$")
     public void getLastCharacterData(String statusCode) {
         Response lastCharacterDataResponse = rickAndMortyApi.executeGetRequest(this.lastCharacterUrl);
         Assertions.assertEquals(Integer.parseInt(statusCode), lastCharacterDataResponse.statusCode());
